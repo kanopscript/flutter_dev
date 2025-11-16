@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter Developer Portfolio - Mobile App Specialist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1600') center/cover;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .portfolio-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.03);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 2rem;
+            color: white;
+        }
+
+        .portfolio-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-item p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .skills-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-level {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 6rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .process-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin: 0 auto 1.5rem;
+        }
+
+        .process-step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .process-step p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .testimonials-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .testimonial-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #667eea;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .services-grid,
+            .portfolio-grid,
+            .skills-grid,
+            .process-steps,
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .services-grid,
+            .portfolio-grid,
+            .skills-grid,
+            .process-steps,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">FlutterDev</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="fade-in">Expert Flutter Developer</h1>
+                <p>Building High-Performance Cross-Platform Mobile Applications for 8+ Years</p>
+                <div class="hero-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">8+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Projects Delivered</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">100K+</div>
+                        <div class="stat-label">App Downloads</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800" alt="Mobile Development">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2 class="section-title">What I Offer</h2>
+        <p class="section-subtitle">Comprehensive mobile development solutions tailored to your needs</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Flutter App Development</h3>
+                <p>Custom cross-platform mobile applications built with Flutter and Dart, ensuring native performance on both iOS and Android platforms.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>UI/UX Implementation</h3>
+                <p>Pixel-perfect implementation of Figma designs with smooth animations, responsive layouts, and intuitive user experiences.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>State Management</h3>
+                <p>Expert implementation of BLoC, Provider, and Riverpod patterns for scalable and maintainable application architecture.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔗</div>
+                <h3>API Integration</h3>
+                <p>Seamless integration of RESTful APIs, Firebase services, and third-party SDKs for extended functionality.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💳</div>
+                <h3>Payment Solutions</h3>
+                <p>Integration of payment gateways including Paystack, Flutterwave, Stripe, and other payment processing systems.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>App Deployment</h3>
+                <p>Complete deployment service to Google Play Store and Apple App Store with optimization and compliance support.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">A showcase of successful mobile applications I've developed</p>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800" alt="E-Commerce App">
+                <div class="portfolio-overlay">
+                    <h3>E-Commerce Platform</h3>
+                    <p>Full-featured shopping app with payment integration and real-time inventory management</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">Stripe</span>
+                        <span class="tech-tag">BLoC</span>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800" alt="Property App">
+                <div class="portfolio-overlay">
+                    <h3>Property Management App</h3>
+                    <p>Real estate platform with geolocation, listings, and virtual tour features</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Google Maps</span>
+                        <span class="tech-tag">Provider</span>
+                        <span class="tech-tag">REST API</span>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800" alt="Healthcare App">
+                <div class="portfolio-overlay">
+                    <h3>Healthcare Appointment System</h3>
+                    <p>Telemedicine app with video consultations and appointment booking</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">WebRTC</span>
+                        <span class="tech-tag">Riverpod</span>
+                        <span class="tech-tag">Node.js</span>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800" alt="Social Media App">
+                <div class="portfolio-overlay">
+                    <h3>Social Media Platform</h3>
+                    <p>Full-featured social app with stories, posts, and real-time messaging</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">BLoC</span>
+                        <span class="tech-tag">Cloud Functions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="skills-container">
+            <h2 class="section-title">Technical Expertise</h2>
+            <p class="section-subtitle">Mastery across the entire mobile development stack</p>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">📱</div>
+                    <div class="skill-name">Flutter & Dart</div>
+                    <div class="skill-level">Expert Level</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎯</div>
+                    <div class="skill-name">BLoC Pattern</div>
+                    <div class="skill-level">Advanced</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🔄</div>
+                    <div class="skill-name">Provider & Riverpod</div>
+                    <div class="skill-level">Advanced</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🔥</div>
+                    <div class="skill-name">Firebase</div>
+                    <div class="skill-level">Expert Level</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🌐</div>
+                    <div class="skill-name">REST APIs</div>
+                    <div class="skill-level">Expert Level</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">💳</div>
+                    <div class="skill-name">Payment Gateways</div>
+                    <div class="skill-level">Advanced</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <div class="skill-name">Figma to Flutter</div>
+                    <div class="skill-level">Expert Level</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🚀</div>
+                    <div class="skill-name">App Store Deploy</div>
+                    <div class="skill-level">Advanced</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="process-container">
+            <h2 class="section-title">Development Process</h2>
+            <p class="section-subtitle">My structured approach to delivering exceptional results</p>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-number">1</div>
+                    <h3>Discovery</h3>
+                    <p>Understanding your requirements, target audience, and project goals through detailed consultation.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">2</div>
+                    <h3>Design & Planning</h3>
+                    <p>Creating wireframes, architecture design, and project timeline with clear milestones.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">3</div>
+                    <h3>Development</h3>
+                    <p>Agile development with regular updates, code reviews, and testing throughout the process.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">4</div>
+                    <h3>Launch & Support</h3>
+                    <p>App store deployment, post-launch monitoring, and ongoing maintenance support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <h2 class="section-title">Client Testimonials</h2>
+            <p class="section-subtitle">What clients say about working with me</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200" alt="Client" class="testimonial-image">
+                    <p class="testimonial-text">"Outstanding developer! Delivered a complex e-commerce app ahead of schedule with excellent quality. Communication was perfect throughout."</p>
+                    <div class="testimonial-author">David Johnson</div>
+                    <div class="testimonial-role">CEO, RetailTech Solutions</div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200" alt="Client" class="testimonial-image">
+                    <p class="testimonial-text">"Exceptional Flutter expertise. Built our healthcare app with clean code and intuitive UI. Highly recommended for any mobile project."</p>
+                    <div class="testimonial-author">Sarah Williams</div>
+                    <div class="testimonial-role">CTO, MediCare Plus</div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200" alt="Client" class="testimonial-image">
+                    <p class="testimonial-text">"Professional, reliable, and delivers exceptional results. Our app has over 50K downloads and maintains a 4.8-star rating."</p>
+                    <div class="testimonial-author">Michael Chen</div>
+                    <div class="testimonial-role">Founder, PropTech Innovations</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <h2 class="section-title">Let's Work Together</h2>
+            <p class="section-subtitle">Ready to bring your mobile app idea to life? Get in touch!</p>
+            <div class="contact-content">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p>chukaemma92@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <h3>Phone</h3>
+                    <p>+234 813 184 0201 </p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <h3>Location</h3>
+                    <p>Lagos, Nigeria (Remote Available)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>Flutter Developer Portfolio</h3>
+            <div class="social-links">
+                <a href="https://github.com/yourusername" target="_blank">🔗</a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank"></a>
+                <a href="mailto:chukaemma92@gmail.com">📧</a>
+            </div>
+            <p>&copy; 2025 Flutter Developer. All rights reserved.</p>
+            <p style="margin-top: 1rem; opacity: 0.7;">Built with HTML, CSS & JavaScript - Demonstrating Clean Code Skills</p>
+        </div>
+    </footer>
+</body>
+</html>
